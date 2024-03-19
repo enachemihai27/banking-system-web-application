@@ -1,0 +1,154 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+
+    {% block style %}
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+
+        .container-table100 {
+	 width: 100%;
+	 min-height: 100vh;
+	 background: #fff;
+	 display: -webkit-box;
+	 display: -webkit-flex;
+	 display: -moz-box;
+	 display: -ms-flexbox;
+	 display: flex;
+	 align-items: top;
+	 justify-content: center;
+	 flex-wrap: wrap;
+	 padding: 33px 0;
+}
+ .container-table100 table {
+	 width: 100%;
+}
+ .container-table100 table.table100 {
+	 background-color: #fff;
+	 border-radius: 10px;
+	 overflow: hidden;
+	 box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -moz-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -o-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -ms-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+}
+ .container-table100 table.table100 th {
+	 padding: 18px 14px;
+	 font-size: 1.2rem;
+	 color: #fff;
+	 line-height: 1.4rem;
+	 background-color: #24477e;
+}
+ .container-table100 table.table100 td {
+	 padding: 14px;
+	 color: #444;
+	 font-size: 1rem;
+	 line-height: 1.4rem;
+}
+ .container-table100 table th, .container-table100 table td {
+	 font-weight: unset;
+}
+ .container-table100 table tr:nth-child(even) {
+     background-color: #f8f6ff;
+ }
+
+    </style>
+
+
+{% endblock %}s
+
+{% block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+<label class="label">De la:</label>
+    <input class="input--style-4" type="date" class="form-control" id="from_date"  name="from_date">
+
+    <label class="label">Pana la:</label>
+    <input class="input--style-4" type="date" class="form-control" id="to_date"  name="to_date">
+    <button class="btn btn-success" type="submit">
+        Filtreaza
+    </button>
+<div class="float-right">
+                                 <a style="margin-left: 10px;" href="{% url 'transactions_list' %}" class="btn btn-outline-dark">
+                Inapoi
+            </a>
+</div>
+</form>
+
+
+
+
+
+ <div class="container-table100">
+                <table class="table100">
+                <thead>
+                    <tr>
+                        <th>De la</th>
+                        <th>Pentru</th>
+                        <th>Tip</th>
+                        <th>Data</th>
+                        <th>Detalii</th>
+                        <th>Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for transaction in transactions.object_list %}
+
+                                <tr>
+                                    <td>{{ transaction.from_user }}</td>
+                                    <td>{{ transaction.to_user }}</td>
+                                    {% if transaction.code ==  10000 %}
+                                    <td>Depozitare</td>
+                                    {% else %}
+                                    <td>Tranzactie</td>
+                                    {% endif %}
+                                    <td>{{ transaction.date }}</td>
+                                    <td>{{ transaction.details}}</td>
+                                    <td>{{ transaction.amount }} RON</td>
+
+
+                                </tr>
+
+
+
+
+                {% endfor %}
+
+
+
+
+                </tbody>
+            </table>
+<div class="pagination">
+    <span class="step-links">
+        {% if transactions.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ transactions.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}.
+        </span>
+
+        {% if transactions.has_next %}
+            <a href="?page={{ transactions.next_page_number }}">next</a>
+            <a href="?page={{ transactions.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+
+

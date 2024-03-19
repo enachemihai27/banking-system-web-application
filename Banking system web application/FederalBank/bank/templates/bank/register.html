@@ -1,0 +1,68 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+
+    {% block style %}
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    {% endblock %}s
+
+
+
+
+
+{% block body %}
+
+
+                    <form method="post">
+                    {% csrf_token %}
+
+                                    <label class="label">Prenume</label>
+                                    <input class="input--style-4" class="form-control" type="text" id="first_name"name="first_name"></br>
+
+                                    <label class="label">Nume</label>
+                                    <input class="input--style-4" type="text"  class="form-control" id="last_name"  name="last_name"></br>
+
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" type="email" class="form-control" id="email"  name="email"></br>
+
+                                    <label class="label">Nume cont</label>
+                                    <input class="input--style-4" type="text" class="form-control" id="username"  name="username"></br>
+
+                                    <label class="label">Parola</label>
+                                    <input class="input--style-4" type="password" class="form-control" id="pwd1" name="password1"></br>
+
+                                    <label class="label">Rescrieti parola</label>
+                                    <input class="input--style-4"type="password" class="form-control" id="pwd2"  name="password2"></br>
+
+                                    <label class="label">Adresa</label>
+                                    <input class="input--style-4"type="text" class="form-control" id="address"  name="address"></br>
+
+                                    <label class="label">Numar de telefon:</label>
+                                    <input type="tel" name="phone"  maxlength="128" required="" id="id_phone"></br>
+
+                                    <label class="label">Nume companie (daca este cazul):</label>
+                                    <input class="input--style-4"type="text" class="form-control" id="company_name"  name="company_name"></br>
+
+                                    <label class="label">Data nasterii:</label>
+                                    <input class="input--style-4"type="date" class="form-control" id="birth_date"  name="birth_date"></br>
+
+                                    <button class="btn btn-succes" type="submit">Creaza cont</button>
+
+                    </form>
+{% if form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+{% endif %}
+
+{% if profile_form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{profile_form.errors}}</div>
+{% endif %}
+
+{% if error_message %}
+<div class="alert alert-danger" role="alert">{{error_message}}</div>
+{% endif %}
+
+
+{% endblock %}
+
+

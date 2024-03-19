@@ -1,0 +1,87 @@
+{% extends 'bank/base_template.html' %}
+
+{% block title %}Acasa{% endblock %}
+
+
+
+{% block style %}
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% if expired_contract == True %}
+                <h1>
+                    Contractul dumneavoastra a expirat.Contactati-ne pentru a va prelungii contractul!
+
+                </h1>
+{% endif %}
+{% if no_contract == True %}
+                <h1>
+                    Nu exista un contract asociat contului dumneavoastra.Contactati-ne pentru a crea unul!
+
+                </h1>
+{% endif %}
+{% if expired_contract == False and no_contract == False  %}
+ <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>
+                    Dashboard
+                    <small></small>
+
+                </h1>
+            </div>
+
+            <div>
+
+            </div>
+
+
+            <div class="d-flex">
+                <div class="d-flex w-75 mx-auto column-gap-1">
+                    <div class="card flex-grow-1 flex-basis-0">
+                        <a href="{% url 'transaction_menu' %}"><img class="card-img-top" style="height: 400px;width: 400px;"  src="https://png.pngtree.com/png-vector/20190307/ourlarge/pngtree-vector-transaction-icon-png-image_755654.jpg" alt="create project"></a>
+                        <div class="card-body">
+                            <h4 class="card-text">Tranzactie noua </h4>
+                        </div>
+                    </div>
+                        <div class="flex-grow-1 flex-basis-0"></div>
+
+
+
+                    <div class="card flex-grow-1 flex-basis-0">
+                        <a href="{% url 'transactions_list' %}"><img class="card-img-top" style="height: 400px;width: 400px;" src="https://cdn1.iconfinder.com/data/icons/ecommerce-outline-6/32/Ecommerce-shopping-sale-transaction_4-512.png" alt="List projects"></a>
+                        <div class="card-body">
+                            <h4 class="card-text">Vezi tranzactii</h4>
+                        </div>
+                    </div>
+                        <div class="flex-grow-1 flex-basis-0"></div>
+
+
+
+                    <div class="card flex-grow-1 flex-basis-0">
+                        <a href="{% url 'deposit' %}"><img class="card-img-top" style="height: 400px;width: 400px;" src="https://cdn.iconscout.com/icon/premium/png-512-thumb/deposit-33-1106063.png" alt="Statistics"></a>
+                        <div class="card-body">
+                            <h4 class="card-text">Depoziteaza</h4>
+                        </div>
+                    </div>
+                        <div class="flex-grow-1 flex-basis-0"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endif %}
+
+
+
+
+{% endblock %}
+
+
+

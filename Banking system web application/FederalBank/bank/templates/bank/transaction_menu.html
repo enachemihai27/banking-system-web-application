@@ -1,0 +1,65 @@
+{% extends 'bank/base_template.html' %}
+
+{% block title %}Acasa{% endblock %}
+
+
+
+{% block style %}
+
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+ <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <h1>
+                    Dashboard
+                    <small></small>
+
+                </h1>
+            </div>
+
+            <div>
+
+            </div>
+
+
+            <div class="d-flex">
+                <div class="d-flex w-75 mx-auto column-gap-1">
+                    <div class="card flex-grow-1 flex-basis-0">
+                        <a href="{% url 'new_transaction' %}"><img class="card-img-top" style="height: 400px;width: 400px;"  src="https://cdn3.iconfinder.com/data/icons/personal-business-finance/64/x-86-512.png" alt="create project"></a>
+                        <div class="card-body">
+                            <h4 class="card-text">Tranzactie prin numarul de telefon </h4>
+                        </div>
+                    </div>
+                        <div class="flex-grow-1 flex-basis-0"></div>
+
+
+
+                    <div class="card flex-grow-1 flex-basis-0">
+                        <a href="{% url 'new_transaction_iban' %}"><img class="card-img-top" style="height: 400px;width: 400px;" src="https://www.clipartmax.com/png/middle/221-2218379_bank-wire-transfers-with-iban-iban-bank-transfer.png" alt="List projects"></a>
+                        <div class="card-body">
+                            <h4 class="card-text">Tranzactie prin codul IBAN </h4>
+                        </div>
+                    </div>
+                        <div class="flex-grow-1 flex-basis-0"></div>
+
+
+            </div>
+
+        </div
+    </div>
+
+
+
+
+
+{% endblock %}
+
+
+

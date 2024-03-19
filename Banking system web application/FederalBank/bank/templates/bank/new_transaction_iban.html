@@ -1,0 +1,48 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}s
+
+{% block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+					<span>
+						 Trazactie noua
+					</span>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+
+
+
+    <button class="btn btn-success" type="submit">
+        Salveaza
+    </button>
+
+</form>
+
+{% if form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+{% endif %}
+
+{% if phone_error  %}
+                     <div class="alert alert-danger" role="alert">Codul IBAN este invalid!</div>
+{% endif %}
+
+
+{% if amount_error  %}
+                     <div class="alert alert-danger" role="alert">Fonduri insuficiente!</div>
+{% endif %}
+
+{% if current_user_error  %}
+                     <div class="alert alert-danger" role="alert">Codul IBAN corespunde contului curent!</div>
+{% endif %}
+
+{% endblock %}
+

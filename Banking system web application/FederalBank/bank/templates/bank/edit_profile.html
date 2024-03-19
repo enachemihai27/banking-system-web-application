@@ -1,0 +1,50 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}s
+
+{% block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+					<span>
+						 Editeaza profil user
+					</span>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+    <label class="label">Adresa</label>
+    <input class="input--style-4" type="text" class="form-control" id="address" value="{{ user.profile.address }}" name="address"></br>
+
+    <label class="label">Numar de telefon:</label>
+    <input type="tel" name="phone" maxlength="128" value="{{ user.profile.phone }}" id="id_phone" readonly></br>
+
+    <label class="label">Nume companie (daca este cazul):</label>
+    <input class="input--style-4" type="text" class="form-control" id="company_name" value="{{ user.profile.company_name }}" name="company_name"></br>
+
+
+<div class="inline-group">
+    <button class="btn btn-success" type="submit">
+        Salveaza
+    </button>
+
+</form>
+                <a href="{% url 'change_password' %}" class="btn btn-outline-dark">
+                    Schimba parola
+                </a>
+</div>
+{% if form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+{% endif %}
+
+{% if field.label_tag  %}
+                     <div class="alert alert-danger" role="alert"> {{ field.label_tag }} {{ field }}</div>
+{% endif %}
+
+{% endblock %}
+

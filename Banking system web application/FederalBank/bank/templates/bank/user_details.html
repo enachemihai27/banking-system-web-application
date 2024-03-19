@@ -1,0 +1,142 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}s
+
+{% block body %}
+
+<div class="row">
+
+
+    <div class="col-md-12">
+        <div class="page-header">
+            <h1>{{ user.username }}</h1>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="table-responsive">
+                    <table class="table">
+
+                        <tr>
+                            <th>Nume</th>
+                            <td class="item-details">{{ user.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prenume</th>
+                            <td class="item-details">{{ user.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Grup</th>
+                            <td>
+                                {{user.groups.all.0.name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Adresa</th>
+                            <td>{{ user.profile.address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Numar de telefon</th>
+                            <td>{{ user.profile.phone }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Data nasterii</th>
+                            <td>{{ user.profile.birth_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Suma in cont:</th>
+                            <td>{{ user.profile.amount }}</td>
+                        </tr>
+                        {% if user.profile.company_name|length > 1 %}
+                        <tr>
+
+                            <th>Nume companie</th>
+                            <td>{{ user.profile.company_name }}</td>
+                        </tr>
+
+                        {% endif %}
+                        <tr>
+                            <th>Data inceperii contractului:</th>
+                            <td>{{ user.profile.contract_start_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Data incheierii contractului:</th>
+                            <td>{{ user.profile.contract_end_date }}</td>
+                        </tr>
+                        {% if user.profile.iban|length > 1 %}
+                        <tr>
+                            <th>IBAN:</th>
+                            <td>{{ user.profile.iban }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Ultima logare</th>
+                            <td>{{ user.last_login }}</td>
+                        </tr>
+                        <tr>
+                            <th>Data inscrierii</th>
+                            <td>{{ user.date_joinedd }}</td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <ul style="display: flex;" class="list-inline">
+            <li>
+
+                {% ifequal current_user.groups.all.0.name "Administrator" %}
+                <a href="{% url 'edit_user_profile' user.id %}" class="btn btn-outline-dark">
+                    Editeaza
+                </a>
+            </li>
+
+            <li><a href="{% url 'delete_user' user.id %}" class="btn btn-danger">
+                Sterge
+            </a></li>
+
+            <a style="margin-left: 10px;" href="{% url 'administrator_menu' %}" class="btn btn-outline-dark">
+                Inapoi
+            </a>
+            {% endifequal %}
+
+            {% ifequal current_user.groups.all.0.name "SuportClient" %}
+            <li>
+                <a style="margin-left: 10px;" href="{% url 'suport_client_menu' %}" class="btn btn-outline-dark">
+                    Inapoi
+                </a>
+            </li>
+            {% endifequal %}
+
+
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

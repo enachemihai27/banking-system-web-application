@@ -1,0 +1,97 @@
+{% extends 'bank/base_template.html' %}
+
+{% block title %}Acasa{% endblock %}
+
+
+{% block style %}
+
+<style>
+    .cc-img {
+        margin: 0 auto;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4 offset-md-4">
+            <div style="width: 600px;" class="card ">
+                <div class="card-header">
+                    <div class="row">
+                        <h3 class="text-xs-center">Detalii card depozitare</h3>
+                        <img class="img-fluid cc-img"
+                             src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                    </div>
+                </div>
+                <div class="card-block">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div style="margin-left: 5px;" class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>NUMARUL CARDULUI</label>
+                                    <div class="input-group">
+                                        <input type="tel" class="form-control" id="number" name="number"
+                                               placeholder="Numarul de pe card"/>
+                                        <span class="input-group-addon"><span class="fa fa-credit-card"></span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label><span class="hidden-xs">DATA EXPIRARII</span></label>
+                                    <input type="tel" class="form-control" id="date" name="date" placeholder="MM / YY"/>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 float-xs-right">
+                                <div class="form-group">
+                                    <label>CODUL CV</label>
+                                    <input type="tel" class="form-control" id="cv" name="cv" placeholder="CVC"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 5px;" class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>NUME PRORPIETAR</label>
+                                    <input type="text" class="form-control" id="name" name="name"
+                                           placeholder="Numele proprietarului"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left: 5px;" class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label>SUMA</label>
+                                    <input type="number" class="form-control" id="amount" name="amount"
+                                           placeholder="suma"/>
+                                </div>
+                            </div>
+                        </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button type="submit" class="btn btn-warning btn-lg btn-block">Depozitare</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            {% if error  %}
+            {% for er in error_messages %}
+             <div class="alert alert-danger" role="alert">{{ er}}</div></br>
+            {% endfor %}
+
+{% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

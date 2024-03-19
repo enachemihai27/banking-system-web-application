@@ -1,0 +1,142 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+
+    {% block style %}
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <style>
+
+        .container-table100 {
+	 width: 100%;
+	 min-height: 100vh;
+	 background: #fff;
+	 display: -webkit-box;
+	 display: -webkit-flex;
+	 display: -moz-box;
+	 display: -ms-flexbox;
+	 display: flex;
+	 align-items: top;
+	 justify-content: center;
+	 flex-wrap: wrap;
+	 padding: 33px 0;
+}
+ .container-table100 table {
+	 width: 100%;
+}
+ .container-table100 table.table100 {
+	 background-color: #fff;
+	 border-radius: 10px;
+	 overflow: hidden;
+	 box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -moz-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -webkit-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -o-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+	 -ms-box-shadow: 0 0 40px 0 rgba(0, 0, 0, .15);
+}
+ .container-table100 table.table100 th {
+	 padding: 18px 14px;
+	 font-size: 1.2rem;
+	 color: #fff;
+	 line-height: 1.4rem;
+	 background-color: #24477e;
+}
+ .container-table100 table.table100 td {
+	 padding: 14px;
+	 color: #444;
+	 font-size: 1rem;
+	 line-height: 1.4rem;
+}
+ .container-table100 table th, .container-table100 table td {
+	 font-weight: unset;
+}
+ .container-table100 table tr:nth-child(even) {
+     background-color: #f8f6ff;
+ }
+
+    </style>
+
+
+{% endblock %}s
+
+{% block body %}
+    <div class="float-right">
+        <a class="btn btn-primary" href="{% url 'create_user' %}">Create new</a>
+    </div>
+
+ <div class="container-table100">
+                <table class="table100">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Prenume</th>
+                        <th>Nume</th>
+                        <th>Email</th>
+                        <th>Ultima Logare</th>
+                        <th>Grup</th>
+                        <th>Actiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users.object_list %}
+
+                                <tr>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td>                                    {{ user.last_login }}</td>
+
+
+                                    <td>
+{{user.groups.all.0.name}}
+                                    </td>
+
+                                    <td nowrap="nowrap">
+
+                                        <a href="{% url 'user_details' user.id %}"class="btn btn-outline-dark">Detalii</a>
+                                        <a href="{% url 'edit_user_profile' user.id %}" class="btn btn-outline-dark">Editeaza</a>
+                                        <a href="{% url 'delete_user' user.id %}" class="btn btn-danger">Sterge</a>
+                                    </td>
+                                </tr>
+
+
+
+
+                {% endfor %}
+
+
+
+
+                </tbody>
+            </table>
+     <div class="pagination">
+    <span class="step-links">
+        {% if users.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ users.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ users.number }} of {{ users.paginator.num_pages }}.
+        </span>
+
+        {% if users.has_next %}
+            <a href="?page={{ users.next_page_number }}">next</a>
+            <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+        </div>
+
+
+
+
+{% endblock %}
+
+
+
+
+

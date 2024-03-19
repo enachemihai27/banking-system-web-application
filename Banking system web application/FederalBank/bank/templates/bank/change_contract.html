@@ -1,0 +1,39 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}s
+
+{% block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+					<span>
+						 Editeaza profil user
+					</span>
+    {% csrf_token %}
+
+
+    <label class="label">Data inceperii contractului:</label>
+    <input class="input--style-4" type="date" class="form-control" id="contract_start_date"  name="contract_start_date"></br>
+
+  <label class="label">Data incheierii contractului:</label>
+    <input class="input--style-4" type="date" class="form-control" id="contract_end_date"  name="contract_end_date"></br>
+
+
+    <button class="btn btn-success" type="submit">
+        Salveaza
+    </button>
+
+</form>
+
+
+{% if profile_form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{profile_form.errors}}</div>
+{% endif %}
+
+{% endblock %}
+

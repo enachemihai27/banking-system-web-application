@@ -1,0 +1,63 @@
+{% extends 'bank/base_template.html' %}
+{% block title %}Ingresitrare{% endblock %}
+
+
+{% block style %}
+
+
+{% endblock %}s
+
+{% block body %}
+
+
+<form method="post" enctype="multipart/form-data">
+					<span>
+						 Editeaza profil user
+					</span>
+    {% csrf_token %}
+    {{ form.as_p }}
+
+
+
+
+
+    <label class="label">Adresa</label>
+    <input class="input--style-4" type="text" class="form-control" id="address" value="{{ user.profile.address }}" name="address"></br>
+
+    <label class="label">Numar de telefon:</label>
+    <input type="tel" name="phone" maxlength="128" value="{{ user.profile.phone }}" id="id_phone"></br>
+
+    <label class="label">Nume companie (daca este cazul):</label>
+    <input class="input--style-4" type="text" class="form-control" id="company_name" value="{{ user.profile.company_name }}" name="company_name"></br>
+
+    <label class="label">Data nasterii:</label>
+    <input class="input--style-4" type="date" class="form-control" id="birth_date" value="{{ user.profile.birth_date }}" name="birth_date"></br>
+
+<div class="inline-group">
+    <button class="btn btn-success" type="submit">
+        Salveaza
+    </button>
+
+</form>
+                        <a style="margin-left: 10px;" href="{% url 'reset_password' user.id %}" class="btn btn-outline-dark">
+                Reseteaza parola
+            </a>
+
+                        <a style="margin-left: 10px;" href="{% url 'administrator_menu' %}" class="btn btn-outline-dark">
+                Inapoi
+            </a>
+</div>
+{% if form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{form.errors}}</div>
+{% endif %}
+
+{% if profile_form.errors  %}
+                     <div class="alert alert-danger" role="alert">{{profile_form.errors}}</div>
+{% endif %}
+
+{% if number_error  %}
+                     <div class="alert alert-danger" role="alert">Exista deja un client cu acest numar de telefon!</div>
+{% endif %}
+
+{% endblock %}
+
